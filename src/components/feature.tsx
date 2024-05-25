@@ -7,7 +7,7 @@ const Feature = () => {
         <h1 className="sm:text-3xl text-2xl font-medium title-font text-center text-gray-900 mb-20">
           Welcome to Sardorbek Sidikov
           <br className="hidden sm:block" />
-          online store
+          online shop
         </h1>
         <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
           <div className="p-4 md:w-1/3 flex">
