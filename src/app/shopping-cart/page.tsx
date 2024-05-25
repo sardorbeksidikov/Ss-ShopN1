@@ -8,19 +8,25 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const ShoppingCart = () => {
-  const [total, setTotal] = useState<number>(0);
-  const [products, setProducts] = useState<ProductType[]>(
-    JSON.parse(localStorage.getItem("carts") as string) || []
-  );
+  const [total, setTotal] = useState<any>(0);
+  const [products, setProducts] = useState<ProductType[]>();
 
   const removeProduct = (id: number) => {
-    const updatedCart = products.filter((product) => product.id !== id);
+    const updatedCart = products?.filter((product) => product.id !== id);
     localStorage.setItem("carts", JSON.stringify(updatedCart));
     setProducts(updatedCart);
   };
 
+  useEffect(() => {
+    const cards = localStorage.getItem("carts");
+    if (cards) {
+      const data = JSON.parse(cards);
+      setProducts(data);
+    }
+  }, []);
+
   const handleIncrement = (id: number) => {
-    const updatedCart = products.map((product) => {
+    const updatedCart = products?.map((product) => {
       if (product.id === id) {
         return {
           ...product,
@@ -36,12 +42,12 @@ const ShoppingCart = () => {
   };
 
   const handleDecrement = (id: number) => {
-    const existProduct = products.find((product) => product.id === id);
+    const existProduct = products?.find((product) => product.id === id);
 
     if (existProduct?.quantity === 1) {
       removeProduct(existProduct.id);
     } else {
-      const updatedCart = products.map((product) => {
+      const updatedCart = products?.map((product) => {
         if (product.id === id) {
           return {
             ...product,
@@ -58,7 +64,7 @@ const ShoppingCart = () => {
   };
 
   useEffect(() => {
-    const total = products.reduce((acc, item) => {
+    const total = products?.reduce((acc, item) => {
       return acc + item.price * item.quantity;
     }, 0);
 
@@ -67,7 +73,7 @@ const ShoppingCart = () => {
 
   return (
     <>
-      {products.length ? (
+      {products?.length ? (
         <div className="h-screen bg-gray-100 pt-20">
           <h1 className="mb-10 text-center text-2xl font-bold">Cart Items</h1>
           <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
@@ -143,7 +149,7 @@ const ShoppingCart = () => {
                       </div>
                       <div className="flex items-center space-x-4">
                         <p className="text-sm">
-                          {(product.price * product.quantity).toLocaleString(
+                          {(product?.price * product?.quantity).toLocaleString(
                             "en-US",
                             {
                               style: "currency",
@@ -175,7 +181,7 @@ const ShoppingCart = () => {
               <div className="mb-2 flex justify-between">
                 <p className="text-gray-700">Subtotal</p>
                 <p className="text-gray-700">
-                  {total.toLocaleString("en-US", {
+                  {total?.toLocaleString("en-US", {
                     currency: "usd",
                     style: "currency",
                   })}
