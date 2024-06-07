@@ -1,9 +1,8 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 const Navbar = () => {
-
   return (
     <header className="flex items-center px-4 md:px-12 py-2 justify-between fixed top-0 w-full z-50 shadow bg-gray-800">
       <Link href={"/"}>
@@ -20,18 +19,16 @@ const Navbar = () => {
             className="mr-5 hover:text-blue-400 text-white ">
             All products
           </Link>
-        
         </nav>
         <Link href={"/shopping-cart"}>
           <button className="button mr-3 bg-blue-600 text-white border-transparent hover:border-blue-600 hover:bg-transparent hover:text-blue-400">
             My bag
           </button>
-         
         </Link>
       </div>
     </header>
     // hero////////////////////////////////////
   );
-}
+};
 
-export default Navbar
+export default Navbar;

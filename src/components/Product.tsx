@@ -4,7 +4,7 @@ import { ProductType } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import CustomImage from './Image';
+import CustomImage from "./Image";
 
 const Product: FC<{ product: ProductType }> = ({ product }) => {
   return (
